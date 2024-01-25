@@ -1,6 +1,6 @@
 // Importar el framework Express para la creación de la aplicación
 const express = require('express');
-
+const axios = require('axios');
 // Importar la biblioteca para trabajar con el sistema de archivos (file system)
 var fs = require("fs");
 
@@ -72,7 +72,27 @@ app.get('/info', auth, (req, res) => {
   res.setHeader("Content-type", "text/html");
   res.send(contenido);
 });
+app.get('/rickymorty', async (req, res) => {
+  // URL de la API externa
+  const urlApiExterna = `https://rickandmortyapi.com/api/character/?page=${req.query.parametro}`;
 
+  try {
+    // Hacer una solicitud a la URL externa
+    const response = await axios.get(urlApiExterna);
+
+    // Los datos JSON de la respuesta externa
+    const datosExternos = response.data;
+
+    // Puedes hacer lo que quieras con los datos, por ejemplo, enviarlos al cliente
+    res.status(200).json(datosExternos);
+  } catch (error) {
+    // Manejar errores
+    console.error('Error al recuperar datos externos de Rick and Morty API:', error.message);
+
+    // Devolver un error al cliente si es necesario
+    res.status(500).json({ error: 'Error al recuperar datos externos de Rick and Morty API' });
+  }
+});
 /*** FUNCIONES POST ***/
 // Ruta para registrar un nuevo usuario en la base de datos
 app.post("/registrar", async function(req, res) {
