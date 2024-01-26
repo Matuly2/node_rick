@@ -18,11 +18,31 @@
         </div>
     </header>
     <nav>
-       
+        <div class="contenedor-desplegable">
+            <button id="boton-desplegable">
+              <img id="imgFiltro" src="img/filtros.png" alt="Botón">
+            </button>
+            <div id="contenido-desplegable" class="contenido-desplegable">
+              <div id="genero">
+                <label>Género:</label>
+                <input type="radio" name="genero" value="masculino"> Masculino
+                <input type="radio" name="genero" value="femenino"> Femenino
+              </div>
+              <div id="estado">
+                <label>Estado:</label>
+                <input type="radio" name="estado" value="vivo"> Vivo
+                <input type="radio" name="estado" value="muerto"> Muerto
+                <input type="radio" name="estado" value="desconocido"> Desconocido
+              </div>
+              <button id="botonBorrar" onclick="borrarFiltro()">Borrar Filtro</button>
+              <button id="botonAplicar" onclick="aplicarFiltro()">Aplicar Filtro</button>
+            </div>
+          </div>
         <label for="pagina">Selecciona una página:</label>
         <select id="pagina" name="pagina">
-       
         </select>
+        <input type="text" id="barraBusqueda" placeholder="Buscar...">
+        <button id="buscar" onclick="buscar()">Buscar</button>
     </nav>
 
     

@@ -93,6 +93,53 @@ app.get('/rickymorty', async (req, res) => {
     res.status(500).json({ error: 'Error al recuperar datos externos de Rick and Morty API' });
   }
 });
+
+//Para filtrar por nombre
+app.get('/nombre', async (req, res) => {
+  
+  const urlApiExterna = `https://rickandmortyapi.com/api/character/?name=${req.query.nombre}`;
+
+  try {
+    
+    const response = await axios.get(urlApiExterna);
+
+    
+    const datosExternos = response.data;
+
+    
+    res.status(200).json(datosExternos);
+  } catch (error) {
+    
+    console.error('Error al recuperar datos externos de Rick and Morty API:', error.message);
+
+    
+    res.status(500).json({ error: 'Error al recuperar datos externos de Rick and Morty API' });
+  }
+});
+
+//Filtrar por vivo, muerto y desconocido
+app.get('/estado', async (req, res) => {
+  console.log("Estoy en situacion")
+  
+  const urlApiExterna = `https://rickandmortyapi.com/api/character/?status=${req.query.estado}`;
+
+  try {
+    
+    const response = await axios.get(urlApiExterna);
+
+    
+    const datosExternos = response.data;
+
+    
+    res.status(200).json(datosExternos);
+  } catch (error) {
+    
+    console.error('Error al recuperar datos externos de Rick and Morty API:', error.message);
+
+    
+    res.status(500).json({ error: 'Error al recuperar datos externos de Rick and Morty API' });
+  }
+});
 /*** FUNCIONES POST ***/
 // Ruta para registrar un nuevo usuario en la base de datos
 app.post("/registrar", async function(req, res) {

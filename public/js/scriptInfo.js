@@ -1,3 +1,5 @@
+var paginaUno;
+
 $(document).ready(function() {
     
     var select = $('#pagina');
@@ -14,6 +16,7 @@ $(document).ready(function() {
         success: function (data) {
             console.log(data);
             renderizarDatos(data);
+            paginaUno=data;
             
         },
         error: function (error) {
@@ -83,7 +86,23 @@ function renderizarDatos(data) {
         console.error('No se encontraron resultados válidos en el objeto JSON.');
     }
 }
-
+function buscar(){
+    var nombre= $("#barraBusqueda").val();
+    $.ajax({
+        url: '/nombre',
+        type: 'GET',
+        dataType: 'json',
+        data: { nombre: nombre }, 
+        success: function (data) {
+            console.log(data);
+            renderizarDatos(data);
+            
+        },
+        error: function (error) {
+            console.error('Error al cargar los datos:', error);
+        }
+    });
+}
 // Función para obtener el color del círculo según el estado de vida
 function getStatusColor(status) {
     switch (status.toLowerCase()) {
@@ -93,5 +112,72 @@ function getStatusColor(status) {
             return 'red'; 
         default:
             return 'gray'; 
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const botonDesplegable = document.getElementById("boton-desplegable");
+    const contenidoDesplegable = document.getElementById("contenido-desplegable");
+  
+    botonDesplegable.addEventListener("click", function () {
+      // Alternar la visibilidad del desplegable al hacer clic en el botón
+      contenidoDesplegable.style.display = contenidoDesplegable.style.display === "block" ? "none" : "block";
+    });
+  
+    // Cerrar el desplegable si se hace clic fuera de él
+    document.addEventListener("click", function (event) {
+      if (!botonDesplegable.contains(event.target) && !contenidoDesplegable.contains(event.target)) {
+        contenidoDesplegable.style.display = "none";
+      }
+    });
+  });
+  
+  function borrarFiltro() {
+    
+    $("input[name='genero']").prop("checked", false);
+
+    
+    $("input[name='estado']").prop("checked", false);
+
+   
+    renderizarDatos(paginaUno);
+}
+
+function aplicarFiltro(){
+    
+    var estadoIn="";
+    const genero = $("input[name='genero']:checked").val();
+    
+    
+    const estadoEs = $("input[name='estado']:checked").val().toLowerCase();
+    console.log(estadoEs)
+    switch(estadoEs){
+        case "vivo":
+            estadoIn="alive";
+            break;
+        case "muerto":
+            estadoIn="dead";
+            break;
+        case "desconocido":
+            estadoIn="unknown";
+            break;
+
+    }
+
+    if(estadoIn){
+        $.ajax({
+            url: '/estado',
+            type: 'GET',
+            dataType: 'json',
+            data: { estado: estadoIn }, 
+            success: function (data) {
+                console.log(data);
+                renderizarDatos(data);
+                
+            },
+            error: function (error) {
+                console.error('Error al cargar los datos:', error);
+            }
+        });
     }
 }
