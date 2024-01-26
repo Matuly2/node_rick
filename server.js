@@ -73,23 +73,23 @@ app.get('/info', auth, (req, res) => {
   res.send(contenido);
 });
 app.get('/rickymorty', async (req, res) => {
-  // URL de la API externa
+  
   const urlApiExterna = `https://rickandmortyapi.com/api/character/?page=${req.query.parametro}`;
 
   try {
-    // Hacer una solicitud a la URL externa
+    
     const response = await axios.get(urlApiExterna);
 
-    // Los datos JSON de la respuesta externa
+    
     const datosExternos = response.data;
 
-    // Puedes hacer lo que quieras con los datos, por ejemplo, enviarlos al cliente
+    
     res.status(200).json(datosExternos);
   } catch (error) {
-    // Manejar errores
+    
     console.error('Error al recuperar datos externos de Rick and Morty API:', error.message);
 
-    // Devolver un error al cliente si es necesario
+    
     res.status(500).json({ error: 'Error al recuperar datos externos de Rick and Morty API' });
   }
 });

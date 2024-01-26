@@ -34,20 +34,33 @@ nav {
     align-items: center;
 }
 
-nav a {
-    text-decoration: none;
-    margin: 0 15px;
-    padding: 8px 15px;
-    border-radius: 5px;
-    background-color: #3add58;
-    color: #fff;
-    transition: background-color 0.3s, color 0.3s;
+.select-container {
+    position: relative;
+    display: inline-block;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
-nav a:hover {
-    background-color: #46eb6a;
+label {
+    display: block;
+    background-color: rgba(29, 136, 29, 0.7);
     color: #fff;
+    padding: 8px;
+    border-radius: 10px ;
 }
+
+select {
+    margin-left: 2px;
+    padding: 8px;
+    font-size: 16px;
+    border: none;
+    background-color: rgba(38, 177, 38, 0.7);
+    color: #fff;
+    width:60px;
+    border-radius: 10px;
+}
+
+
 
 main {
     background-color: #dae7f0;
@@ -77,7 +90,7 @@ footer {
 }
 
 .personaje {
-    width: calc(30% - 20px);
+    width: calc(25% - 20px);
     margin-bottom: 20px;
     position: relative;
     overflow: hidden;
