@@ -7,14 +7,14 @@ $(document).ready(function() {
         select.append('<option value="' + i + '">' + i + '</option>');
     }
 
-    // Realizar la solicitud al servidor con el valor predeterminado (1)
+    
     $.ajax({
         url: '/rickymorty',
         type: 'GET',
         dataType: 'json',
         data: { parametro: 1 }, 
         success: function (data) {
-            console.log(data);
+            
             renderizarDatos(data);
             paginaUno=data;
             
@@ -36,7 +36,7 @@ $(document).ready(function() {
             dataType: 'json',
             data: { parametro: valorSeleccionado }, 
             success: function (data) {
-                console.log(data);
+                
                 renderizarDatos(data);
                 
             },
@@ -94,7 +94,7 @@ function buscar(){
         dataType: 'json',
         data: { nombre: nombre }, 
         success: function (data) {
-            console.log(data);
+            
             renderizarDatos(data);
             
         },
@@ -145,12 +145,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function aplicarFiltro(){
     
-    var estadoIn="";
-    const genero = $("input[name='genero']:checked").val();
+    let estadoIn="";
+    let generoIn="";
+    let generoEs = $("input[name='genero']:checked").val();
+    if(generoEs!==undefined){
+       generoEs=generoEs.toLowerCase() 
+    }
     
     
-    const estadoEs = $("input[name='estado']:checked").val().toLowerCase();
-    console.log(estadoEs)
+    let estadoEs = $("input[name='estado']:checked").val();
+    if(estadoEs!==undefined){
+        estadoEs=estadoEs.toLowerCase();
+    }
+    
     switch(estadoEs){
         case "vivo":
             estadoIn="alive";
@@ -161,7 +168,19 @@ function aplicarFiltro(){
         case "desconocido":
             estadoIn="unknown";
             break;
+        default:
+            estadoIn="";
+    }
 
+    switch(generoEs){
+        case "masculino":
+            generoIn="male";
+            break;
+        case "femenino":
+            generoIn="female";
+            break;
+        default:
+            generoIn="";
     }
 
     if(estadoIn){
@@ -171,7 +190,7 @@ function aplicarFiltro(){
             dataType: 'json',
             data: { estado: estadoIn }, 
             success: function (data) {
-                console.log(data);
+                
                 renderizarDatos(data);
                 
             },
@@ -179,5 +198,22 @@ function aplicarFiltro(){
                 console.error('Error al cargar los datos:', error);
             }
         });
+    }else if(generoIn){
+        $.ajax({
+            url: '/genero',
+            type: 'GET',
+            dataType: 'json',
+            data: { genero: generoIn }, 
+            success: function (data) {
+                
+                renderizarDatos(data);
+                
+            },
+            error: function (error) {
+                console.error('Error al cargar los datos:', error);
+            }
+        });
+    }else{
+        console.log("No se ha aplicado ningún filtro.")
     }
 }

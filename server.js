@@ -119,9 +119,33 @@ app.get('/nombre', async (req, res) => {
 
 //Filtrar por vivo, muerto y desconocido
 app.get('/estado', async (req, res) => {
-  console.log("Estoy en situacion")
+  
   
   const urlApiExterna = `https://rickandmortyapi.com/api/character/?status=${req.query.estado}`;
+
+  try {
+    
+    const response = await axios.get(urlApiExterna);
+
+    
+    const datosExternos = response.data;
+
+    
+    res.status(200).json(datosExternos);
+  } catch (error) {
+    
+    console.error('Error al recuperar datos externos de Rick and Morty API:', error.message);
+
+    
+    res.status(500).json({ error: 'Error al recuperar datos externos de Rick and Morty API' });
+  }
+});
+
+//Filtrar por Género
+app.get('/genero', async (req, res) => {
+  
+  
+  const urlApiExterna = `https://rickandmortyapi.com/api/character/?gender=${req.query.genero}`;
 
   try {
     
