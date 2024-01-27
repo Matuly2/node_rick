@@ -224,3 +224,49 @@ display: flex;
 #estado{
 display: flex;
 }
+
+@media only screen and (max-width: 600px) {
+    header {
+        position: relative;
+    }
+
+    nav {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    #contenido-desplegable {
+        max-width: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    #botonBorrar,
+    #botonAplicar,
+    select,
+    #barraBusqueda,
+    #buscar {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    .personaje {
+        width: calc(50% - 20px);
+    }
+
+    #resultados-container {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    .info-container {
+        position: static;
+        width: 100%;
+    }
+
+    #genero,
+    #estado {
+        display: block;
+    }
+}
