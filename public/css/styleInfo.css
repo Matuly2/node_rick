@@ -263,10 +263,33 @@ display: flex;
     .info-container {
         position: static;
         width: 100%;
+        opacity: 0;
+        animation: fadeIn 1s forwards; /* Ajusta el tiempo de la animación aquí */
     }
 
     #genero,
     #estado {
         display: block;
+    }
+
+    .personaje:hover .info-container,
+    .personaje:focus .info-container,
+    .personaje:active .info-container {
+        animation: fadeIn 1s forwards; /* Ajusta el tiempo de la animación aquí */
+    }
+
+    .personaje:focus,
+    .personaje:active {
+        outline: none; 
+    }
+
+    .personaje img {
+        cursor: pointer; 
+    }
+
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
+        }
     }
 }
