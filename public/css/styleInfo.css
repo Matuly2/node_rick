@@ -235,10 +235,45 @@ display: flex;
         text-align: center;
     }
 
+    .contenedor-desplegable {
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    #imgFiltro {
+        width: 40px;
+        margin-right: 5px;
+    }
+
+    #boton-desplegable {
+        background: none;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        padding: 8px 15px;
+    }
+
     #contenido-desplegable {
-        max-width: 100%;
+        max-width: 300px;
+        display: none;
+        position: absolute;
+        top: 100%;
         left: 50%;
         transform: translateX(-50%);
+        background-color: #f9f9f9;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 10px;
+        border-radius: 4px;
+    }
+
+    #contenido-desplegable label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    #contenido-desplegable input[type="radio"] {
+        margin-right: 5px;
     }
 
     #botonBorrar,
@@ -264,7 +299,7 @@ display: flex;
         position: static;
         width: 100%;
         opacity: 0;
-        animation: fadeIn 1s forwards; /* Ajusta el tiempo de la animación aquí */
+        animation: fadeIn 1s forwards;
     }
 
     #genero,
@@ -275,7 +310,7 @@ display: flex;
     .personaje:hover .info-container,
     .personaje:focus .info-container,
     .personaje:active .info-container {
-        animation: fadeIn 1s forwards; /* Ajusta el tiempo de la animación aquí */
+        animation: fadeIn 1s forwards;
     }
 
     .personaje:focus,
